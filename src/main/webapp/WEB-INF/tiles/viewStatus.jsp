@@ -35,7 +35,7 @@
 
                     <div class="edit-links pull-right"><a href="${editLink}">edit</a> |  <a
                             onclick="return confirm(
-                            'Once this Status is deleted, you can no longer to see it anymore. Are you sure you want to delete anyway?');"
+                            'Once this Status is deleted, you can no longer to see it. Are you sure you want to delete anyway?');"
                             href="${deleteLink}">delete</a></div>
 
                 </div>

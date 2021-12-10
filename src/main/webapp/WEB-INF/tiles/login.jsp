@@ -4,15 +4,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
-
-
 <div class="container">
 
     <div class="content">
 
         <div class="logindiv">
             <h3>User Login</h3>
+            <c:if test="${param.error != null}">
+            <div class="alert alert-danger">
+                Incorrect Username or Password
+            </div>
+            </c:if>
+            <div class="alert alert-success" style="display: none;">
+            </div>
 
             <form role="form" name="frmLogin" id="frmLogin" action="/login" class="userfrm" method="POST" >
 
@@ -30,7 +34,7 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
                 <button type="submit" id="btnSubmit" class="btn btn-primary">Sign In</button>
-                <a href="pwrecovery" title="Cannot Sign in"> Cannot Sign in?</a>
+                <a href="recovery" title="Cannot Sign in"> Cannot Sign in?</a>
 
             </form>
             <br />

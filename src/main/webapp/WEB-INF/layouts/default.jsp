@@ -1,6 +1,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -30,7 +31,7 @@
     <!-- Static navbar -->
     <nav class="navbar navbar-default nav-bar-static-top">
         <div class="container">
-        <div class="container-fluid">
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -49,22 +50,33 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                           role="button" aria-haspopup="true" aria-expanded="false">Status
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/addstatus">Add Status</a></li>
-                            <li><a href="/viewstatus">My Status</a></li>
-                        </ul>
-                    </li>
+                    <sec:authorize access="!isAuthenticated()">
+                        <li><a href="/login">Login</a></li>
+                    </sec:authorize>
+                    <sec:authorize access="isAuthenticated()">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">Account
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/addstatus">Add Status</a></li>
+                                <li><a href="/viewstatus">My Status</a></li>
+                                <li><a href="javascript:$('#logoutForm').submit()">Logout</a></li>
+                            </ul>
+                        </li>
+                    </sec:authorize>
 
                 </ul>
 
             </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+
         </div> <!-- /container -->
     </nav>
+
+
+    <form id="logoutForm" method="post" action="/logout">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+    </form>
 
 
 
