@@ -12,7 +12,7 @@ import java.util.Date;
 
 
 @Entity
-@Table
+@Table(name="post")
 public class StatusUpdate {
 
     @Id
