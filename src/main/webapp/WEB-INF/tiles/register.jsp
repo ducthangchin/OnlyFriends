@@ -32,12 +32,12 @@
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <form:input type="password" name="password" id="password" path="password" class="form-control" placeholder="password" />
+                    <form:input type="password" name="password" id="password" path="plainPassword" class="form-control" placeholder="password" />
                 </div>
 
                 <div class="form-group">
                     <label for="passwordre">Confirm Password</label>
-                    <input type="password" name="passwordre" id="passwordre" class="form-control" placeholder="confirm password" />
+                    <form:input type="password" name="passwordre" id="passwordre" path="repeatPassword" class="form-control" placeholder="confirm password" />
                 </div>
 
                 <div class="form-group">

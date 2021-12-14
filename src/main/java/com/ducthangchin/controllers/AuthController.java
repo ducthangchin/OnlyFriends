@@ -2,6 +2,7 @@ package com.ducthangchin.controllers;
 
 
 import com.ducthangchin.model.WebUser;
+import com.ducthangchin.service.EmailService;
 import com.ducthangchin.service.WebUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,17 @@ public class AuthController {
     @Autowired
     WebUserService webUserService;
 
+    @Autowired
+    private EmailService emailService;
+
     @RequestMapping("/login")
     String admin() {
         return "app.login";
+    }
+
+    @RequestMapping("/verify")
+    String verify() {
+        return "app.verify";
     }
 
 
@@ -43,7 +52,10 @@ public class AuthController {
 
         if (!result.hasErrors()) {
             webUserService.register(user);
-            modelAndView.setViewName("redirect:/home");
+
+            emailService.sendVerificationEmail(user.getEmail());
+
+            modelAndView.setViewName("redirect:/verify");
         }
 
         return modelAndView;
