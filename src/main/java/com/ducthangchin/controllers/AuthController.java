@@ -6,6 +6,7 @@ import com.ducthangchin.service.WebUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,13 +37,13 @@ public class AuthController {
     }
 
     @RequestMapping(value="/register", method=RequestMethod.POST)
-    ModelAndView register(ModelAndView modelAndView, @Valid WebUser user, BindingResult result) {
+    ModelAndView register(ModelAndView modelAndView, @ModelAttribute(value="user") @Valid WebUser user, BindingResult result) {
 
         modelAndView.setViewName("app.register");
 
         if (!result.hasErrors()) {
             webUserService.register(user);
-            modelAndView.setViewName("redirect:/viewstatus");
+            modelAndView.setViewName("redirect:/home");
         }
 
         return modelAndView;

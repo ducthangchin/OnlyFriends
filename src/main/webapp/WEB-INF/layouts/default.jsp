@@ -53,7 +53,12 @@
                     <sec:authorize access="!isAuthenticated()">
                         <li><a href="/login">Login</a></li>
                     </sec:authorize>
-                    <sec:authorize access="isAuthenticated()">
+
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <li><a href="javascript:$('#logoutForm').submit()">Logout</a></li>
+                    </sec:authorize>
+
+                    <sec:authorize access="hasRole('ROLE_USER')">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                role="button" aria-haspopup="true" aria-expanded="false">Account

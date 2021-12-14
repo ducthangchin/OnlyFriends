@@ -1,9 +1,13 @@
 package com.ducthangchin.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="User")
+@Table(name="Users")
 public class WebUser {
 
     @Id
@@ -11,10 +15,23 @@ public class WebUser {
     private Long id;
 
     @Column(unique = true)
+    @NotBlank(message="username cannot be blank.")
     private String username;
 
     @Column(unique = true)
+    @Email(message="{register.email.invalid}")
+    @NotBlank(message="{register.email.invalid}")
     private String email;
+
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     private String password;
 

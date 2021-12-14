@@ -14,14 +14,12 @@
             <h3>New User Registration</h3>
 
 
-            <c:if test="${param.error != null}">
-                <div class="alert alert-danger">
-                    <form:errors path="email"/>
-                    <form:errors path="username"/>
-                    <form:errors path="password"/>
+
+                <div class="error">
+                    <form:errors path="user.*"/>
                 </div>
 
-            </c:if>
+
 
 
             <%--@elvariable id="user" type="com.ducthangchin.model.WebUser"--%>
@@ -39,7 +37,7 @@
 
                 <div class="form-group">
                     <label for="passwordre">Confirm Password</label>
-                    <input type="password" name="passwordre" id="passwordre" class="form-control" placeholder="confirm password" required />
+                    <input type="password" name="passwordre" id="passwordre" class="form-control" placeholder="confirm password" />
                 </div>
 
                 <div class="form-group">
