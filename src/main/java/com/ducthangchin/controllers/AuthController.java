@@ -16,24 +16,21 @@ import javax.validation.Valid;
 
 @Controller
 public class AuthController {
+
     @Autowired
     WebUserService webUserService;
 
     @Autowired
-    private EmailService emailService;
+    EmailService emailService;
+
+
 
     @RequestMapping("/login")
     String admin() {
         return "app.login";
     }
 
-    @RequestMapping("/verify")
-    String verify() {
-        return "app.verify";
-    }
-
-
-    @RequestMapping(value="/register", method= RequestMethod.GET)
+    @RequestMapping("/register")
     ModelAndView register(ModelAndView modelAndView) {
 
         WebUser user = new WebUser();
@@ -43,22 +40,35 @@ public class AuthController {
         modelAndView.setViewName("app.register");
 
         return modelAndView;
+
     }
 
-    @RequestMapping(value="/register", method=RequestMethod.POST)
-    ModelAndView register(ModelAndView modelAndView, @ModelAttribute(value="user") @Valid WebUser user, BindingResult result) {
+
+    @RequestMapping(value="/register", method= RequestMethod.POST)
+    ModelAndView register (ModelAndView modelAndView, @ModelAttribute(value="user") @Valid WebUser user, BindingResult result) {
 
         modelAndView.setViewName("app.register");
 
-        if (!result.hasErrors()) {
+
+        if(!result.hasErrors()) {
+
             webUserService.register(user);
 
-            emailService.sendVerificationEmail(user.getEmail());
+            emailService.sendVerificationEmail(user.getEmail(), user.getUsername());
 
             modelAndView.setViewName("redirect:/verify");
         }
 
         return modelAndView;
-
     }
+
+    @RequestMapping("/verify")
+    public String verify() {
+        return "app.verify";
+    }
+
+
+
+
+
 }

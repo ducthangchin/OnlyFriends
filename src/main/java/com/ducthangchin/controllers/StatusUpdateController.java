@@ -93,7 +93,7 @@ public class StatusUpdateController {
 
         if (!result.hasErrors()) {
             statusUpdateService.save(statusUpdate);
-            modelAndView.setViewName("redirect:/home");
+            modelAndView.setViewName("redirect:/viewstatus");
         }
 
         return modelAndView;

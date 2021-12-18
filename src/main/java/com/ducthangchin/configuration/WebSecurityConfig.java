@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private WebUserService webUserService;
+    private WebUserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -31,10 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/*",
                         "/img/*")
                 .permitAll()
-                .antMatchers("/addstatus",
-                        "/editstatus",
-                        "/deletestatus",
-                        "/viewstatus")
+                .antMatchers("/addstatus","/editstatus","deletestatus","/viewstatus")
                 .hasRole("USER")
                 .and()
             .formLogin()
@@ -46,19 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin")
-                .password("admin")
-                .roles("USER");
-
-    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(webUserService).passwordEncoder(passwordEncoder);
+
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
+
     }
 }

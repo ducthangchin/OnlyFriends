@@ -15,9 +15,9 @@
 
 
 
-                <div class="error">
-                    <form:errors path="user.*"/>
-                </div>
+            <div class="error">
+                <form:errors path="user.*"/>
+            </div>
 
 
 
@@ -37,7 +37,7 @@
 
                 <div class="form-group">
                     <label for="passwordre">Confirm Password</label>
-                    <form:input type="password" name="passwordre" id="passwordre" path="repeatPassword" class="form-control" placeholder="confirm password" />
+                    <form:input type="password" name="passwordre" id="passwordre" path="confirmPassword" class="form-control" placeholder="confirm password" />
                 </div>
 
                 <div class="form-group">

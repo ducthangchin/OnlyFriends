@@ -22,20 +22,27 @@ public class WebUserService implements UserDetailsService {
     private WebUserDao webUserDao;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
+
 
     public void register(WebUser user) {
+
         user.setRole("ROLE_USER");
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         webUserDao.save(user);
+
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
         WebUser user = webUserDao.findByEmail(email);
 
         if (user == null) {
+
+            System.out.println("The username " + user.getEmail() + " does not exist.");
+
             return null;
         }
 
@@ -44,9 +51,5 @@ public class WebUserService implements UserDetailsService {
         String password = user.getPassword();
 
         return new User(email, password, auth);
-
     }
 }
-
-
-

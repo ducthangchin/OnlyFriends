@@ -1,6 +1,5 @@
 package com.ducthangchin.service;
 
-import com.mysql.cj.exceptions.ClosedOnExpiredPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,16 +25,15 @@ public class EmailService {
     @Value("${mail.enable}")
     private Boolean enable;
 
-    private void send(MimeMessagePreparator preparator){
-
+    private void send(MimeMessagePreparator preparator) {
         if(enable) {
             mailSender.send(preparator);
         }
-
     }
 
     @Autowired
-    public void EmailService(TemplateEngine templateEngine) {
+    public EmailService(TemplateEngine templateEngine) {
+
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 
         templateResolver.setPrefix("mail/");
@@ -47,35 +45,33 @@ public class EmailService {
         this.templateEngine = templateEngine;
     }
 
-    public void sendVerificationEmail(String emailAddress) {
+    public void sendVerificationEmail(String emailAddress, String username) {
 
         Context context = new Context();
-
-        context.setVariable("name", "ztkhan");
+        context.setVariable("name", username);
 
         String emailContents = templateEngine.process("verifyemail", context);
 
+        System.out.println(emailContents);
+
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
 
                 MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 
                 message.setTo(emailAddress);
-
-                message.setFrom(new InternetAddress("no-reply@ducthangchin.com"));
-
+                message.setFrom(new InternetAddress("no-reply@caveofprogramming.com"));
                 message.setSubject("Please Verify Your Email Address");
-
                 message.setSentDate(new Date());
 
                 message.setText(emailContents, true);
             }
+
         };
 
         send(preparator);
-
-
     }
 }
