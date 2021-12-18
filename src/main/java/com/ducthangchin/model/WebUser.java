@@ -5,7 +5,6 @@ import com.ducthangchin.validation.ConfirmPasswordMatch;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -41,6 +40,16 @@ public class WebUser {
     String confirmPassword;
 
     String role;
+
+    private Boolean enabled = false;
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public String getConfirmPassword() {
         return confirmPassword;
@@ -100,5 +109,19 @@ public class WebUser {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "WebUser{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", plainPassword='" + plainPassword + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", role='" + role + '\'' +
+                ", enabled=" + enabled +
+                '}';
     }
 }

@@ -7,7 +7,7 @@
 
 <p>Thank you for registering to the OnlyFriends Site</p>
 
-<p>Please click <a href="#">here</a> to verify your email address.</p>
+<p>Please click <a th:href="@{${url} + '/confirmregister?t=' + ${token}}">here</a> to verify your email address.</p>
 
 </th:block>
 

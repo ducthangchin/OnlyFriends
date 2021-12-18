@@ -17,7 +17,7 @@ public class StatusUpdateService {
     private StatusUpdateDao statusUpdateDao;
 
     public StatusUpdate getStatus(Long id) {
-        return statusUpdateDao.findOne(id);
+        return statusUpdateDao.findById(id).get();
     }
 
 
@@ -36,7 +36,7 @@ public class StatusUpdateService {
     }
 
     public void delete(Long id) {
-        statusUpdateDao.delete(id);
+        statusUpdateDao.deleteById(id);
     }
 
 

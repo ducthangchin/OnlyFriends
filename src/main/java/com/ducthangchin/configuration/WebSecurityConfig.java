@@ -24,19 +24,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home", "/register", "/about")
+                .antMatchers("/",
+                        "/home",
+                        "/register",
+                        "/about",
+                        "/confirmregister",
+                        "/invaliduser",
+                        "/expiredtoken",
+                        "/verify")
                 .permitAll()
                 .antMatchers(
                         "/js/*",
                         "/css/*",
                         "/img/*")
                 .permitAll()
-                .antMatchers("/addstatus","/editstatus","deletestatus","/viewstatus")
+                .antMatchers("/addstatus",
+                        "/editstatus",
+                        "deletestatus",
+                        "/viewstatus")
                 .hasRole("USER")
+                .anyRequest()
+                .denyAll()
                 .and()
             .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
             .logout()

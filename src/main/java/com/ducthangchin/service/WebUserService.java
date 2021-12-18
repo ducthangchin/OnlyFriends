@@ -1,8 +1,7 @@
 package com.ducthangchin.service;
 
 
-import com.ducthangchin.model.WebUser;
-import com.ducthangchin.model.WebUserDao;
+import com.ducthangchin.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -10,10 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class WebUserService implements UserDetailsService {
@@ -22,7 +21,12 @@ public class WebUserService implements UserDetailsService {
     private WebUserDao webUserDao;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private VerificationTokenDao verificationTokenDao;
+
+
+    public WebUser findUser(String email) {
+        return webUserDao.findByEmail(email);
+    }
 
 
     public void register(WebUser user) {
@@ -30,7 +34,10 @@ public class WebUserService implements UserDetailsService {
         user.setRole("ROLE_USER");
 
         webUserDao.save(user);
+    }
 
+    public void save(WebUser user) {
+        webUserDao.save(user);
     }
 
 
@@ -50,6 +57,24 @@ public class WebUserService implements UserDetailsService {
 
         String password = user.getPassword();
 
-        return new User(email, password, auth);
+        Boolean enabled = user.getEnabled();
+
+        return new User(email, password, enabled, true, true, true, auth);
+    }
+
+    public String createEmailVerificationToken(WebUser user) {
+        VerificationToken token = new VerificationToken(UUID.randomUUID().toString(), user, TokenType.REGISTRATION);
+
+        verificationTokenDao.save(token);
+
+        return token.getToken();
+    }
+
+    public VerificationToken getVerification(String token) {
+        return verificationTokenDao.findByToken(token);
+    }
+
+    public void deleteToken(VerificationToken token){
+        verificationTokenDao.delete(token);
     }
 }
