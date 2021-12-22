@@ -37,7 +37,7 @@
                         <p class="homepage-status">
                                 ${statusUpdate.text}
                         </p>
-                        <c:if test="${statusUpdate.imgURL != null}">
+                        <c:if test="${statusUpdate.imgURL != null and statusUpdate.imgURL != ''}">
                             <img src="${img}${statusUpdate.imgURL}" class="img-responsive">
                         </c:if>
                         <div class="btn-group">

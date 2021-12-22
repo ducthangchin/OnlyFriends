@@ -53,29 +53,7 @@ public class StatusUpdateController {
         return user;
     }
 
-    @RequestMapping(value = "/viewstatus", method = RequestMethod.GET)
-    ModelAndView viewStatus(ModelAndView modelAndView, @RequestParam(name = "p", defaultValue = "1") int pageNumber) {
 
-        Page<StatusUpdate> page = statusUpdateService.getPage(pageNumber);
-
-        modelAndView.getModel().put("page", page);
-        modelAndView.getModel().put("user", profileService.findProfile(getUser()));
-
-
-        List<StatusUpdate> posts = page.getContent();
-        Map<Long, List<Comment>> postComments = new HashMap<>();
-
-        posts.stream()
-                .forEach(statusUpdate -> {
-                    postComments.put(statusUpdate.getId(), commentService.getCommentsByPost(statusUpdate));
-                });
-
-        modelAndView.getModel().put("postComments", postComments);
-
-        modelAndView.setViewName("app.viewStatus");
-
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/addstatus", method = RequestMethod.GET)
     ModelAndView addStatus(ModelAndView modelAndView, @ModelAttribute("statusUpdate") StatusUpdate statusUpdate) {
@@ -105,9 +83,6 @@ public class StatusUpdateController {
 
         }
 
-        StatusUpdate latestStatusUpdate = statusUpdateService.getLatest();
-        modelAndView.getModel().put("latestStatusUpdate", latestStatusUpdate);
-
         return modelAndView;
 
     }
@@ -117,8 +92,8 @@ public class StatusUpdateController {
 
         modelAndView.setViewName("redirect:/mystatus");
 
-
-        if (getUser().getId() == statusUpdateService.getStatus(id).getOwner().getId()) {
+        if (getUser().getId() == statusUpdateService.getStatus(id).getOwner().getUser().getId()) {
+            System.out.println("status deleted");
             statusUpdateService.delete(id);
         }
 
@@ -156,12 +131,46 @@ public class StatusUpdateController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/viewstatus", method = RequestMethod.GET)
+    ModelAndView viewStatus(ModelAndView modelAndView, @RequestParam(name = "p", defaultValue = "1") int pageNumber) {
+
+        Page<StatusUpdate> page = statusUpdateService.getPage(pageNumber);
+
+        modelAndView.getModel().put("page", page);
+        modelAndView.getModel().put("user", profileService.findProfile(getUser()));
+
+
+        List<StatusUpdate> posts = page.getContent();
+        Map<Long, List<Comment>> postComments = new HashMap<>();
+
+        posts.stream()
+                .forEach(statusUpdate -> {
+                    postComments.put(statusUpdate.getId(), commentService.getCommentsByPost(statusUpdate));
+                });
+
+        modelAndView.getModel().put("postComments", postComments);
+
+        modelAndView.setViewName("app.viewStatus");
+
+        return modelAndView;
+    }
     @RequestMapping("/mystatus")
     ModelAndView myStatus(ModelAndView modelAndView) {
 
         Profile profile = profileService.findProfile(getUser());
         List<StatusUpdate> statuses = statusUpdateService.getByOwner(profile);
+
         modelAndView.getModel().put("statusUpdates", statuses);
+
+        Map<Long, List<Comment>> postComments = new HashMap<>();
+
+        statuses.stream()
+                .forEach(statusUpdate -> {
+                    postComments.put(statusUpdate.getId(), commentService.getCommentsByPost(statusUpdate));
+                });
+        
+        modelAndView.getModel().put("postComments", postComments);
+
         modelAndView.getModel().put("user", profile);
         modelAndView.setViewName("app.myStatus");
 
@@ -177,8 +186,6 @@ public class StatusUpdateController {
         StatusUpdate statusUpdate = statusUpdateService.getStatus(id);
         Long ownerId = statusUpdate.getOwner().getUser().getId();
 
-        System.out.println(ownerId);
-        System.out.println(user.getId());
         if (user.getId() != ownerId) {
             modelAndView.setViewName("/redirect:viewstatus");
             return modelAndView;

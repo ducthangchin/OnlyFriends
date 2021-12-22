@@ -1,5 +1,6 @@
 package com.ducthangchin.service;
 
+import com.ducthangchin.model.Comment;
 import com.ducthangchin.model.Profile;
 import com.ducthangchin.model.StatusUpdate;
 import com.ducthangchin.model.StatusUpdateDao;
@@ -21,6 +22,9 @@ public class StatusUpdateService {
     @Autowired
     private StatusUpdateDao statusUpdateDao;
 
+    @Autowired
+    private CommentService commentService;
+
     public StatusUpdate getStatus(Long id) {
         return statusUpdateDao.findById(id).get();
     }
@@ -41,14 +45,20 @@ public class StatusUpdateService {
     }
 
     public void delete(Long id) {
+        List<Comment> comments = commentService.getCommentsByPost(getStatus(id));
+        comments.stream()
+                .forEach(comment -> {
+                    commentService.deleteComment(comment);
+                });
+
         statusUpdateDao.deleteById(id);
     }
 
 
     public List<StatusUpdate> getByOwner(Profile user) {
         List<StatusUpdate> statusUpdates = new ArrayList<>();
-        statusUpdateDao.findAllByOwner(user).forEach(statusUpdate -> statusUpdates.add(statusUpdate));
-        statusUpdates.sort(Comparator.comparing(StatusUpdate::getAdded));
+        statusUpdateDao.findAllByOwnerOrderByAddedDesc(user).forEach(statusUpdate -> statusUpdates.add(statusUpdate));
+
         return statusUpdates;
     }
 

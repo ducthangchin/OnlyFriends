@@ -16,8 +16,10 @@
         <div class="panel-title m-l-2">Posted By ${user.fullname}</div>
 
     </div>
+
     <c:forEach var="statusUpdate" items="${statusUpdates}" >
 
+        <c:url var="addCommentLink" value="/addComment"/>
         <c:url var="deleteImageLink" value="/delete-status-img/${statusUpdate.id}"/>
         <c:url var="addImageLink" value="/add-img-to-status/${statusUpdate.id}"/>
         <c:url var="editLink" value="/editstatus?id=${statusUpdate.id}"/>
@@ -67,7 +69,7 @@
                     <p class="homepage-status">
                             ${statusUpdate.text}
                     </p>
-                    <c:if test="${statusUpdate.imgURL != null}">
+                    <c:if test="${statusUpdate.imgURL != null and statusUpdate.imgURL != ''}">
                         <img src="${img}${statusUpdate.imgURL}" class="img-responsive">
                     </c:if>
                     <div class="btn-group">
@@ -77,13 +79,46 @@
                     </div>
                 </div>
                 <div class="social-footer">
+                    <c:forEach var="comment" items="${postComments[statusUpdate.id]}">
+                        <div class="social-comment">
+                            <a href="/profile/${comment.commenter.user.id}" class="pull-left">
+                                <img alt="image" src="${img}${comment.commenter.avatarURL}">
+                            </a>
+                            <div class="media-body">
+                                <a href="/profile/${comment.commenter.user.id}">
+                                        ${comment.commenter.fullname}
+                                </a>
+                                    ${comment.text}
+                                <br>
+                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                                <small class="text-muted">
+                                    <fmt:formatDate pattern=" d MMMM y 'at' H:mm"
+                                                    value="${comment.added}"/>
+                                </small>
+                                <c:if test="${comment.commenter.id == user.id}">
+                                    <a href="/deletecomment?id=${comment.id}" class="small" class="pull-right">delete</a>
+                                </c:if>
+
+                            </div>
+                        </div>
+                    </c:forEach>
+
+
+
                     <div class="social-comment">
                         <a href="/profile" class="pull-left">
                             <img alt="image" src="${img}${user.avatarURL}">
                         </a>
                         <div class="media-body">
-                            <textarea class="form-control" placeholder="Write comment..."></textarea>
+                            <form method="post" action="${addCommentLink}">
+                                <input type="text" name="text"  class="form-control" placeholder="Write comment..."/>
+
+                                <input type="hidden" name="postId" value="${statusUpdate.id}">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                            </form>
                         </div>
+
+
                     </div>
                 </div>
             </div>

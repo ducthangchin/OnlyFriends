@@ -10,5 +10,5 @@ import java.util.List;
 public interface StatusUpdateDao extends PagingAndSortingRepository<StatusUpdate, Long> {
     StatusUpdate findFirstByOrderByAddedDesc();
 
-    Iterable<StatusUpdate> findAllByOwner(Profile profile);
+    Iterable<StatusUpdate> findAllByOwnerOrderByAddedDesc(Profile profile);
 }

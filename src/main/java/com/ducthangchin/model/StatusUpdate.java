@@ -30,7 +30,7 @@ public class StatusUpdate {
     @JoinColumn(nullable = true)
     Profile owner;
 
-    String imgURL;
+    String imgURL=null;
 
     @PrePersist
     protected void onCreate() {
