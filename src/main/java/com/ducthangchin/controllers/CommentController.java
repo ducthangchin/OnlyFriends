@@ -64,4 +64,21 @@ public class CommentController {
 
         return modelAndView;
     }
+
+
+    @RequestMapping(value = "/deletecomment")
+    ModelAndView deleteComment(ModelAndView modelAndView, @RequestParam("id") Long commentId) {
+
+        modelAndView.setViewName("redirect:/viewstatus");
+
+        Comment comment = commentService.getCommentById(commentId);
+
+        Long commenterID = comment.getCommenter().getUser().getId();
+
+        if (commenterID == getUser().getId()) {
+            commentService.deleteComment(comment);
+        }
+
+        return  modelAndView;
+    }
 }

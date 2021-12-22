@@ -63,7 +63,10 @@
                                         <fmt:formatDate pattern=" d MMMM y 'at' H:mm"
                                                         value="${comment.added}"/>
                                     </small>
-                                    <a href="#" class="small" class="pull-right">delete</a>
+                                    <c:if test="${comment.commenter.id == user.id}">
+                                        <a href="/deletecomment?id=${comment.id}" class="small" class="pull-right">delete</a>
+                                    </c:if>
+
                                 </div>
                             </div>
                         </c:forEach>
