@@ -58,7 +58,7 @@
                                     </a>
                                     ${comment.text}
                                     <br>
-                                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> Like this!</a> -
                                     <small class="text-muted">
                                         <fmt:formatDate pattern=" d MMMM y 'at' H:mm"
                                                         value="${comment.added}"/>
@@ -93,8 +93,14 @@
             </div>
         </c:forEach>
 
+        <div class="pull-right">
+            <jwp:pagination url="${url}" page="${page}" size="1" />
+        </div>
+
+
+
     </div>
-    <jwp:pagination url="${url}" page="${page}" size="1" />
+
 </div>
 
 

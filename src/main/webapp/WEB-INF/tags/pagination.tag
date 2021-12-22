@@ -18,10 +18,15 @@
 
 <c:if test="${page.totalPages != 1}">
 
-<div class="pagination">
+<ul class="pagination">
 
     <c:if test="${block != 0}">
-        <a href="${url}?p=${(block-1)*size+1}&b=${block-1}">&lt;&lt;</a>
+        <li class="page-item disabled">
+            <span class="page-link">
+                <a href="${url}?p=${(block-1)*size+1}&b=${block-1}">Previous</a>
+            </span>
+        </li>
+
     </c:if>
 
 
@@ -32,25 +37,45 @@
 
             <c:when test="${page.number != pageNumber-1}">
 
-                <a href="${url}?p=${pageNumber}&b=${block}"><c:out value="${pageNumber}"/></a>
+                <li class="page-item">
+                    <a class="page-link" href="${url}?p=${pageNumber}&b=${block}">
+                        <c:out value="${pageNumber}"/>
+                    </a>
+                </li>
+
+
 
             </c:when>
 
             <c:otherwise>
 
-                <strong><c:out value="${pageNumber}"/></strong>
+
+                <li class="page-item active">
+                     <span class="page-link">
+
+                         <strong><c:out value="${pageNumber}"/></strong>
+                         <span class="sr-only">(current)</span>
+
+                      </span>
+                </li>
+
+
 
             </c:otherwise>
         </c:choose>
 
-        <c:if test="${pageNumber != page.totalPages}">|</c:if>
-
     </c:forEach>
 
     <c:if test="${endPage != page.totalPages}">
-        <a href="${url}?p=${endPage+1}&b=${block+1}">&gt;&gt;</a>
+
+        <li class="page-item">
+            <a class="page-link" href="${url}?p=${endPage+1}&b=${block+1}">Next</a>
+        </li>
+
+
     </c:if>
 
 </c:if>
 
-</div>
+</ul>
+
