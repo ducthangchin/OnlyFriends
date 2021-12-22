@@ -2,7 +2,6 @@ package com.ducthangchin.controllers;
 
 
 import com.ducthangchin.model.Profile;
-import com.ducthangchin.model.StatusUpdate;
 import com.ducthangchin.model.WebUser;
 import com.ducthangchin.service.ProfileService;
 import com.ducthangchin.service.StatusUpdateService;
@@ -11,22 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.MalformedParameterizedTypeException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 
 @Controller
@@ -85,9 +79,6 @@ public class ProfileController {
     }
 
 
-
-
-
     @RequestMapping(value = "/editprofile", method = RequestMethod.GET)
     public ModelAndView editProfile(ModelAndView modelAndView, @ModelAttribute("editProfile") Profile editProfile) {
 
@@ -133,7 +124,9 @@ public class ProfileController {
 
     @RequestMapping(value = "upload-profile-photo", method=RequestMethod.GET)
     public ModelAndView photoUpload(ModelAndView modelAndView) {
+
         modelAndView.setViewName("app.uploadProfilePhoto");
+
         return  modelAndView;
     }
 
@@ -157,9 +150,6 @@ public class ProfileController {
 
         profile.setAvatarURL("/avatar/"+file.getOriginalFilename());
         profileService.save(profile);
-
-
-        System.out.println(profile.getAvatarURL());
 
         return modelAndView;
 

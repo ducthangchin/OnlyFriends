@@ -54,12 +54,10 @@ public class StatusUpdateController {
     }
 
 
-
     @RequestMapping(value = "/addstatus", method = RequestMethod.GET)
     ModelAndView addStatus(ModelAndView modelAndView, @ModelAttribute("statusUpdate") StatusUpdate statusUpdate) {
 
         modelAndView.setViewName("app.addStatus");
-
 
         return modelAndView;
     }
@@ -67,24 +65,19 @@ public class StatusUpdateController {
     @RequestMapping(value = "/addstatus", method = RequestMethod.POST)
     ModelAndView addStatus(ModelAndView modelAndView, @Valid StatusUpdate statusUpdate, BindingResult result) {
 
-
-
         modelAndView.setViewName("app.addStatus");
 
         if (!result.hasErrors()) {
             WebUser user = getUser();
-
 
             statusUpdate.setOwner(profileService.findProfile(user));
             statusUpdateService.save(statusUpdate);
 
             modelAndView.getModel().put("statusUpdate", statusUpdate);
             modelAndView.setViewName("redirect:/viewstatus");
-
         }
 
         return modelAndView;
-
     }
 
     @RequestMapping(value = "/deletestatus", method = RequestMethod.GET)
@@ -96,7 +89,6 @@ public class StatusUpdateController {
             System.out.println("status deleted");
             statusUpdateService.delete(id);
         }
-
 
         return modelAndView;
     }
@@ -122,7 +114,6 @@ public class StatusUpdateController {
 
         modelAndView.setViewName("app.editStatus");
 
-
         if (!result.hasErrors()) {
             statusUpdateService.save(statusUpdate);
             modelAndView.setViewName("redirect:/mystatus");
@@ -139,7 +130,6 @@ public class StatusUpdateController {
         modelAndView.getModel().put("page", page);
         modelAndView.getModel().put("user", profileService.findProfile(getUser()));
 
-
         List<StatusUpdate> posts = page.getContent();
         Map<Long, List<Comment>> postComments = new HashMap<>();
 
@@ -154,6 +144,7 @@ public class StatusUpdateController {
 
         return modelAndView;
     }
+
     @RequestMapping("/mystatus")
     ModelAndView myStatus(ModelAndView modelAndView) {
 
@@ -168,7 +159,7 @@ public class StatusUpdateController {
                 .forEach(statusUpdate -> {
                     postComments.put(statusUpdate.getId(), commentService.getCommentsByPost(statusUpdate));
                 });
-        
+
         modelAndView.getModel().put("postComments", postComments);
 
         modelAndView.getModel().put("user", profile);
@@ -194,10 +185,7 @@ public class StatusUpdateController {
         modelAndView.getModel().put("id", id);
         modelAndView.setViewName("app.addImgToStatus");
         return  modelAndView;
-
     }
-
-
 
     @RequestMapping(value = "/add-img-to-status", method=RequestMethod.POST)
     public ModelAndView addImage(ModelAndView modelAndView, @RequestParam("file") MultipartFile file, @RequestParam("id") Long id) {

@@ -14,21 +14,16 @@ public class Profile {
     @JoinColumn(nullable = false)
     private WebUser user;
 
-
     @Column(length=1000)
     private String about;
-
-
 
     String address;
 
     String avatarURL;
 
-
     String phone;
 
     String fullname;
-
 
     @PrePersist
     protected void onCreate() {

@@ -102,7 +102,7 @@ public class AuthController {
 
         if (token == null) {
             modelAndView.setViewName("redirect:/invaliduser");
-//            System.out.println("token still not deleted");
+//          System.out.println("token still not deleted");
             return modelAndView;
         }
 

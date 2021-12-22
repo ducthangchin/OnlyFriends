@@ -1,9 +1,5 @@
 package com.ducthangchin.model;
 
-
-
-import jdk.nashorn.internal.parser.Token;
-
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,15 +25,12 @@ public class VerificationToken {
     @Enumerated(EnumType.STRING)
     private TokenType type;
 
-
-
     @PrePersist
     private void setDate() {
 
         Calendar c = Calendar.getInstance();
         c.add(Calendar.HOUR, 24);
         expiry = c.getTime();
-
     }
 
 
