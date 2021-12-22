@@ -21,6 +21,13 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${contextRoot}/css/main.css">
+    <style type="text/css">
+        body{
+
+            text-align: left;
+            background-color: #e2e8f0;
+        }
+    </style>
 
 
 </head>
@@ -29,7 +36,7 @@
 
 
     <!-- Static navbar -->
-    <nav class="navbar navbar-default nav-bar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
 
             <div class="navbar-header">
@@ -43,8 +50,8 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/home">Home</a></li>
-                    <li><a href="/about">About</a></li>
+                    <li class="active"><a href="/mystatus">Home</a></li>
+                    <li><a href="/profile">About</a></li>
 
 
                 </ul>
@@ -65,7 +72,7 @@
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/addstatus">Add Status</a></li>
-                                <li><a href="/viewstatus">My Status</a></li>
+                                <li><a href="/mystatus">My Status</a></li>
                                 <li><a href="javascript:$('#logoutForm').submit()">Logout</a></li>
                             </ul>
                         </li>
@@ -88,7 +95,7 @@
 
 
 
-<div class="container">
+<div class="container margin-top">
     <tiles:insertAttribute name="content" />
 </div>
 

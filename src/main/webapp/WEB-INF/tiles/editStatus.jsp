@@ -22,6 +22,8 @@
 
                 <form:input type="hidden" path="id"/>
                 <form:input type="hidden" path="added"/>
+                <form:input type="hidden" path="owner"/>
+                <form:input type="hidden" path="imgURL"/>
 
 
                 <div class="error">

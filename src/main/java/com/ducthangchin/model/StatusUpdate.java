@@ -19,14 +19,18 @@ public class StatusUpdate {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Size(min=5, max=2550, message="{addstatus.text.size}")
+    @Size(max=6000, message="{addstatus.text.size}")
     private String text;
 
     @DateTimeFormat(pattern="yyyy/MM/dd hh:mm:ss")
     @Temporal(TemporalType.TIMESTAMP)
     private Date added;
 
+    @ManyToOne(targetEntity = Profile.class)
+    @JoinColumn(nullable = true)
+    Profile owner;
 
+    String imgURL;
 
     @PrePersist
     protected void onCreate() {
@@ -46,6 +50,15 @@ public class StatusUpdate {
     public StatusUpdate(String text, Date added) {
         this.text = text;
         this.added = added;
+    }
+
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public Long getId() {
@@ -72,6 +85,13 @@ public class StatusUpdate {
         this.added = added;
     }
 
+    public Profile getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Profile owner) {
+        this.owner = owner;
+    }
 
     @Override
     public String toString() {

@@ -68,7 +68,7 @@ public class EmailService {
                 MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 
                 message.setTo(emailAddress);
-                message.setFrom(new InternetAddress("no-reply@caveofprogramming.com"));
+                message.setFrom(new InternetAddress("no-reply@ducthangchin.com"));
                 message.setSubject("Please Verify Your Email Address");
                 message.setSentDate(new Date());
 

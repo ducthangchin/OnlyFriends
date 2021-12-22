@@ -23,7 +23,6 @@ public class WebUser {
     String email;
 
 
-    @Column(unique = true)
     @NotBlank(message = "User name may not empty.")
     String username;
 

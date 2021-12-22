@@ -15,6 +15,7 @@ public class VerificationToken {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column
     private String token;
 
     @OneToOne(targetEntity = WebUser.class)
@@ -88,5 +89,17 @@ public class VerificationToken {
 
     public void setType(TokenType type) {
         this.type = type;
+    }
+
+
+    @Override
+    public String toString() {
+        return "VerificationToken{" +
+                "id=" + id +
+                ", token='" + token + '\'' +
+                ", user=" + user +
+                ", expiry=" + expiry +
+                ", type=" + type +
+                '}';
     }
 }

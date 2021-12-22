@@ -26,9 +26,10 @@
             <form:form  class="userfrm" modelAttribute="user" method="POST" >
 
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <form:input type="text" name="username" id="username" path="username" class="form-control" placeholder="username"/>
+                    <label for="email">Email</label>
+                    <form:input type="email" name="email" id="email" path="email" class="form-control" placeholder="e-mail address" />
                 </div>
+
 
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -41,8 +42,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <form:input type="email" name="email" id="email" path="email" class="form-control" placeholder="e-mail address" />
+                    <label for="username">Full Name</label>
+                    <form:input type="text" name="username" id="username" path="username" class="form-control" placeholder="Full Name"/>
                 </div>
 
                 <input type="hidden" name="formaction" value="register" />

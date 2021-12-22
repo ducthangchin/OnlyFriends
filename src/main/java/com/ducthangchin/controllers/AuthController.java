@@ -1,9 +1,11 @@
 package com.ducthangchin.controllers;
 
 
+import com.ducthangchin.model.Profile;
 import com.ducthangchin.model.VerificationToken;
 import com.ducthangchin.model.WebUser;
 import com.ducthangchin.service.EmailService;
+import com.ducthangchin.service.ProfileService;
 import com.ducthangchin.service.WebUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +28,9 @@ public class AuthController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private ProfileService profileService;
 
     @Value("${message.registration.confirmed}")
     private String registrationConfirmedMessage;
@@ -68,6 +73,9 @@ public class AuthController {
 
             webUserService.register(user);
 
+            Profile profile = new Profile(user);
+            profileService.save(profile);
+
             String token = webUserService.createEmailVerificationToken(user);
 
             emailService.sendVerificationEmail(user.getEmail(), user.getUsername(), token);
@@ -88,20 +96,26 @@ public class AuthController {
     ModelAndView registration(ModelAndView modelAndView, @RequestParam("t") String tokenString) {
 
         VerificationToken token = webUserService.getVerification(tokenString);
+//        System.out.println(tokenString);
+//        System.out.println("token is null?: " + token);
+
 
         if (token == null) {
             modelAndView.setViewName("redirect:/invaliduser");
+//            System.out.println("token still not deleted");
             return modelAndView;
         }
 
         Date expiryDate = token.getExpiry();
         if (expiryDate.before(new Date())) {
             modelAndView.setViewName("redirect:/expiredtoken");
+//            System.out.println("token deleted");
             webUserService.deleteToken(token);
             return modelAndView;
         }
 
         WebUser user = token.getUser();
+
 
         if (user == null) {
             modelAndView.setViewName("redirect:/invaliduser");

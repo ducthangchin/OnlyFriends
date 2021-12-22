@@ -24,8 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/",
-                        "/home",
+                .antMatchers(
                         "/register",
                         "/about",
                         "/confirmregister",
@@ -36,19 +35,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/js/*",
                         "/css/*",
-                        "/img/*")
+                        "/img/**")
                 .permitAll()
                 .antMatchers("/addstatus",
                         "/editstatus",
                         "deletestatus",
                         "/viewstatus")
                 .hasRole("USER")
-                .anyRequest()
-                .denyAll()
+                .antMatchers("/profile",
+                        "/profile/*",
+                        "/editprofile",
+                        "/home",
+                        "/",
+                        "/mystatus",
+                        "/upload-profile-photo",
+                        "/add-img-to-status/*",
+                        "/add-img-to-status",
+                        "/delete-status-img/")
+                .authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/profile")
                 .permitAll()
                 .and()
             .logout()

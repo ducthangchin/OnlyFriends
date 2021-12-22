@@ -12,7 +12,7 @@
             <h3>User Login</h3>
             <c:if test="${param.error != null}">
             <div class="alert alert-danger">
-                Incorrect Username or Password
+                Incorrect Email or Password
             </div>
             </c:if>
             <div class="alert alert-success" style="display: none;">
@@ -21,8 +21,8 @@
             <form role="form" name="frmLogin" id="frmLogin" action="/login" class="userfrm" method="POST" >
 
                 <div class="form-group">
-                    <label for="username">Email or Username</label>
-                    <input class="form-control" type="text" name="username" id="username" placeholder="Email or Username"  autofocus required/>
+                    <label for="username">Email</label>
+                    <input class="form-control" type="text" name="username" id="username" placeholder="Email"  autofocus required/>
                 </div>
 
                 <div class="form-group">

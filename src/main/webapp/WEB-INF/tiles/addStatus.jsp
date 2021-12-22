@@ -34,25 +34,6 @@
 
         </div>
 
-        <div class="panel panel-default">
-
-            <div class="panel-heading">
-                <div class="panel-title">
-                    Status update added on
-                    <fmt:formatDate pattern="EEEE d MMMM y 'at' H:mm:s"
-                                    value="${latestStatusUpdate.added}" />
-                </div>
-            </div>
-
-            <div class="panel-body">
-
-                ${latestStatusUpdate.text}
-
-            </div>
-
-
-        </div>
-
 
     </div>
 

@@ -28,6 +28,8 @@ public class WebUserService implements UserDetailsService {
         return webUserDao.findByEmail(email);
     }
 
+    public WebUser findById(Long id) {return webUserDao.findById(id).get();}
+
 
     public void register(WebUser user) {
 
@@ -66,6 +68,8 @@ public class WebUserService implements UserDetailsService {
         VerificationToken token = new VerificationToken(UUID.randomUUID().toString(), user, TokenType.REGISTRATION);
 
         verificationTokenDao.save(token);
+        System.out.println(token.getToken());
+        System.out.println("Token saved!");
 
         return token.getToken();
     }

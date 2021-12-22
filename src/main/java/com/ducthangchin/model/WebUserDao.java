@@ -6,5 +6,4 @@ public interface WebUserDao extends CrudRepository<WebUser, Long> {
 
     WebUser findByEmail(String email);
 
-
 }
