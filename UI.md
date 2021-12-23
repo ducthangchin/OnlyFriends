@@ -68,66 +68,79 @@
         login page
         <img src="UI-sketches/login.png"/>
       </li>
+      <li>
+        login page with error
+        <img src="UI-sketches/login-error.png"/>
+      </li>
     </ul>
     
   
   <li>
     <h3 id="register">Register page</h3>
-    <img src="#"/>
+    <ul>
+      <li>
+        register
+        <img src="UI-sketches/register.png"/>
+      </li>
+      <li>
+        register-error
+        <img src="UI-sketches/register-error.png"/>
+      </li>
+    </ul>
   </li>
   
   <li>
     <h3 id="verify">Verification page</h3>
-    <img src="#"/>
+    <img src="UI-sketches/verify.png"/>
   </li>
   
   <li>
     <h3 id="message">Message page</h3>
-    <img src="#"/>
+    <img src="UI-sketches/message.png"
   </li>
   
    <li>
     <h3 id="feed">News feed page</h3>
-    <img src="#"/>
+    <img src="UI-sketches/feed.png"/>
    </li>
   
    <li>
     <h3 id="addStatus">Add Status page</h3>
-    <img src="#"/>
+    <img src="UI-sketches/addStatus.png"/>
    </li>
   
   <li>
     <h3 id="editStatus">Edit Status page</h3>
-    <img src="#"/>
+    <img src="editStatus.png"/>
   </li>
   
    <li>
     <h3 id="about">About page</h3>
-    <img src="#"/>
+    <img src="UI-sketches/profile.png"/>
    </li>
   
    <li>
     <h3 id="editProfile">Edit Profile page</h3>
-    <img src="#"/>
+    <img src="UI-sketches/editProfile.png"/>
    </li>
   
    <li>
     <h3 id="home">Home page</h3>
-    <img src="#"/>
+    <img src="UI-sketches/home.png"/>
    </li>
   
    <li>
     <h3 id="uploadImg">Upload Image page</h3>
-    <img src="#"/>
+    <img src="UI-sketches/uploadImg.png"/>
    </li>
   
   <li>
     <h3 id="userManagement"> User Management page</h3>
-    <img src="#">
+    <img src="UI-sketches/userManagement.png">
   </li>
   
   <li>
     <h3 id="statusManament"> Status Management page</h3>
-    <img src="#">
+    <img src="UI-sketches/statusManagement.png">
   </li>
 </ol>
