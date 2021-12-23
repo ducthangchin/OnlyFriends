@@ -63,7 +63,12 @@
 <ol>
   <li>
     <h3 id="login">Login page</h3>
-    <img src="UI-sketches/login.png"/>
+    <ul>
+      <li>
+        login page
+        <img src="UI-sketches/login.png"/>
+      </li>
+    </ul>
     
   
   <li>
