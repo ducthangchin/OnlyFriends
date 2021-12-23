@@ -63,10 +63,8 @@
 <ol>
   <li>
     <h3 id="login">Login page</h3>
-    <img src="#"/>
-    ![image](https://user-images.githubusercontent.com/69846657/147270000-8b442a9f-6dbf-4b3e-a830-e860713e17c5.png)
-
-  </li>
+    <img src="UI-sketches/login.png"/>
+    
   
   <li>
     <h3 id="register">Register page</h3>
@@ -104,7 +102,7 @@
    </li>
   
    <li>
-    <h3 id="editProfile">Add Status page</h3>
+    <h3 id="editProfile">Edit Profile page</h3>
     <img src="#"/>
    </li>
   
