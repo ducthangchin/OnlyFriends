@@ -111,7 +111,7 @@
   
   <li>
     <h3 id="editStatus">Edit Status page</h3>
-    <img src="editStatus.png"/>
+    <img src="UI-sketches/editStatus.png"/>
   </li>
   
    <li>
