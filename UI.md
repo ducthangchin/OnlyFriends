@@ -101,7 +101,7 @@
   
    <li>
     <h3 id="feed">News feed page</h3>
-    <img src="UI-sketches/feed.png"/>
+    <img src="UI-sketches/newfeed.png"/>
    </li>
   
    <li>
@@ -131,7 +131,16 @@
   
    <li>
     <h3 id="uploadImg">Upload Image page</h3>
-    <img src="UI-sketches/uploadImg.png"/>
+     <ul>
+       <li>
+          upload profile image
+          <img src="UI-sketches/upload.img.avatar.png"/>
+       </li>
+       <li>
+          upload status image
+          <img src="UI-sketches/upload.img.status.png"/>
+       </li>
+     </ul>
    </li>
   
   <li>
