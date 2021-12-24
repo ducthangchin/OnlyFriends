@@ -5,7 +5,7 @@
  - User: Can be a registered user or guest. A registed user has ability to manage his own account, public a new post, interact with other users and their post as well. Otherwise, a user who hasn't logged in or signed up for a new account considered a guest can only browse other posts.
 
 ## 2. Use Case Diagram
-<img src="use_case.jpg">
+<img src="Diagram/use_case.jpg">
 
 ## 3. Use Case specifications
 |Use cases|Discription|Actor|Preconditions|Main stream|Sub stream|Postconditions|
