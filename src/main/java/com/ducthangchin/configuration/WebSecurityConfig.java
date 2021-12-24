@@ -37,21 +37,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/*",
                         "/img/**")
                 .permitAll()
-                .antMatchers("/addstatus",
+                .antMatchers(
+                        "/addstatus",
                         "/editstatus",
-                        "deletestatus",
-                        "/viewstatus")
+                        "/mystatus",
+                        "/add-img-to-status/*",
+                        "/delete-status-img/")
                 .hasRole("USER")
+                .antMatchers(
+                        "/user-management",
+                        "/deletestatus",
+                        "/changeauth",
+                        "/changerole")
+                .hasRole("ADMIN")
                 .antMatchers("/profile",
                         "/profile/*",
                         "/editprofile",
                         "/home",
                         "/",
-                        "/mystatus",
+                        "/viewstatus",
                         "/upload-profile-photo",
-                        "/add-img-to-status/*",
-                        "/add-img-to-status",
-                        "/delete-status-img/")
+                        "/addComment",
+                        "/deletecomment")
                 .authenticated()
                 .and()
             .formLogin()

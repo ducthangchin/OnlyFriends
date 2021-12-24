@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="jwp" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 
 <c:url var="url" value="/viewstatus"/>
@@ -15,6 +16,7 @@
         <c:forEach var="statusUpdate" items="${page.content}" >
 
             <c:url var="addCommentLink" value="/addComment"/>
+            <c:url var="deleteLink" value="/deletestatus?id=${statusUpdate.id}"/>
 
 
             <div class="social-feed-separated">
@@ -32,6 +34,9 @@
                                 <fmt:formatDate pattern="EEEE d MMMM y 'at' H:mm"
                                                 value="${statusUpdate.added}"/>
                         </small>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            <a href="${deleteLink}">delete post</a>
+                        </sec:authorize>
                     </div>
                     <div class="social-body">
                         <p class="homepage-status">
@@ -63,12 +68,20 @@
                                         <fmt:formatDate pattern=" d MMMM y 'at' H:mm"
                                                         value="${comment.added}"/>
                                     </small>
-                                    <c:if test="${comment.commenter.id == user.id}">
-                                        <a href="/deletecomment?id=${comment.id}" class="small" class="pull-right">delete</a>
-                                    </c:if>
+                                    <sec:authorize access="hasRole('ROLE_USER')">
+                                        <c:if test="${comment.commenter.id == user.id}">
+                                            <a href="/deletecomment?id=${comment.id}" class="small" class="pull-right">delete</a>
+                                        </c:if>
+                                    </sec:authorize>
+
+                                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                        <a href="/deletecomment?id=${comment.id}" class="small" class="pull-right">delete comment</a>
+                                    </sec:authorize>
+
 
                                 </div>
                             </div>
+
                         </c:forEach>
 
 

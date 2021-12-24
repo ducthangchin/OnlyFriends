@@ -6,6 +6,10 @@ import com.ducthangchin.model.WebUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 @Service
 public class ProfileService {
     @Autowired
@@ -17,6 +21,16 @@ public class ProfileService {
 
     public void save(Profile profile) {
         profileDao.save(profile);
+    }
+
+    public List<Profile> getAll() {
+        List<Profile> profiles = new ArrayList<>();
+
+        profileDao.findAll().forEach(profile -> profiles.add(profile));
+
+        profiles.sort(Comparator.comparing(Profile::getId));
+
+        return profiles;
     }
 
 

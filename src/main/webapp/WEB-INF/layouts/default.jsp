@@ -33,6 +33,17 @@
 </head>
 <body>
 
+<c:url var="onlyfriends" value="/viewstatus"/>
+<c:url var="home" value="/mystatus"/>
+<c:url var="about" value="/profile"/>
+<c:url var="postmanage" value="/viewstatus"/>
+<c:url var="usermanage" value="/user-management"/>
+
+
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    <c:url var="onlyfriends" value="/profile"/>
+</sec:authorize>
+
 
 
     <!-- Static navbar -->
@@ -46,12 +57,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/viewstatus">OnlyFriends</a>
+                <a class="navbar-brand" href="${onlyfriends}">OnlyFriends</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/mystatus">Home</a></li>
-                    <li><a href="/profile">About</a></li>
+
+                    <sec:authorize access="!isAuthenticated()">
+                        <li class="active"><a href="${home}">Home</a></li>
+                        <li><a href="${about}">About</a></li>
+                    </sec:authorize>
+
+                    <sec:authorize access="hasRole('ROLE_USER')">
+                        <li class="active"><a href="${home}">Home</a></li>
+                        <li><a href="${about}">About</a></li>
+                    </sec:authorize>
+
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <li class="active"><a href="${postmanage}">Post Management</a></li>
+                        <li><a href="${usermanage}">User Management</a></li>
+                    </sec:authorize>
+
 
 
                 </ul>

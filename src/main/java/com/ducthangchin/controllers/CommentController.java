@@ -74,7 +74,8 @@ public class CommentController {
 
         Long commenterID = comment.getCommenter().getUser().getId();
 
-        if (commenterID == getUser().getId()) {
+
+        if (commenterID == getUser().getId() || getUser().getRole().equals("ROLE_ADMIN")) {
             commentService.deleteComment(comment);
         }
 

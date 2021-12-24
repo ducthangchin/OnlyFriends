@@ -154,3 +154,11 @@ body{
 .margin-top {
     margin-top: 70px;
 }
+
+.header-background {
+    background-color: #94b3d2;
+}
+
+.m-b-1 {
+    margin-bottom: 15px;
+}

@@ -85,8 +85,10 @@ public class StatusUpdateController {
 
         modelAndView.setViewName("redirect:/mystatus");
 
-        if (getUser().getId() == statusUpdateService.getStatus(id).getOwner().getUser().getId()) {
-            System.out.println("status deleted");
+        if (getUser().getId() == statusUpdateService.getStatus(id).getOwner().getUser().getId() || getUser().getRole().equals("ROLE_ADMIN")) {
+            if(getUser().getRole().equals("ROLE_ADMIN")){
+                modelAndView.setViewName("redirect:/viewstatus");
+            }
             statusUpdateService.delete(id);
         }
 

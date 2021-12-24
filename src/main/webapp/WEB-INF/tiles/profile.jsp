@@ -23,9 +23,18 @@
                             <p class="text-muted font-size-sm"><small>${profile.user.email}</small></p>
                             <p class="text-secondary mb-1">${profile.about}</p>
                             <p class="text-muted font-size-sm">${profile.address}</p>
+                            <c:choose>
+                                <c:when test="${profile.user.role == 'ROLE_ADMIN'}">
+                                    <button class="btn btn-primary">Administrator</button>
+                                </c:when>
 
-                            <button class="btn btn-primary">Follow</button>
-                            <button class="btn btn-outline-primary">Message</button>
+                                <c:otherwise>
+                                    <button class="btn btn-primary">Follow</button>
+                                    <button class="btn btn-outline-primary">Message</button>
+                                </c:otherwise>
+                            </c:choose>
+
+
                         </div>
                     </div>
                 </div>
