@@ -153,3 +153,7 @@
     <img src="UI-sketches/statusManagement.png">
   </li>
 </ol>
+
+
+<h2>Interface Diagram</h2>
+<img src="UIdiagram.png"/>
