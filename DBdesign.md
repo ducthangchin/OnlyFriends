@@ -142,7 +142,7 @@
 </ul>
 
 ## 2. Entity Relasionship Diagram
-<img src="ERD.jpg">
+<img src="Diagram/ERD.jpg">
 
 ## 3. Database model:
-<img src="DBmodel.png">
+<img src="Diagram/DBmodel.png">
