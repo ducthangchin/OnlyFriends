@@ -46,13 +46,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasRole("USER")
                 .antMatchers(
                         "/user-management",
-                        "/deletestatus",
                         "/changeauth",
                         "/changerole")
                 .hasRole("ADMIN")
                 .antMatchers("/profile",
                         "/profile/*",
                         "/editprofile",
+                        "/deletestatus",
                         "/home",
                         "/",
                         "/viewstatus",
