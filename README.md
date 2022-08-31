@@ -33,4 +33,6 @@ The application should be support the following requirements:
 This Web application is developed for a group of users who share the same passion for cinema and culture. Users can see the shares from others and can leave comments, reactions and follow. There is going to be an idea of building a recommendation system so that it automatically recommends videos that are most relevant to the user's interest. 
 
 ### 6. Reference:
-[User Interface Design](UI.md)
+- [Use case](UseCase.md)
+- [Database design](DBdesign.md)
+- [User Interface Design](UI.md)
