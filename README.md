@@ -1,6 +1,6 @@
 # VideoStreamingWebApp
 A Web service that allows users to upload photos and short videos
-<!-- <p><img src="Logo/logo2.png" width="350"></p> -->
+<p><img src="Logo/logo2.png" width="350"></p> 
 <img src="UI-sketches/newfeed.png"/>
 
 ## Analysis of the task and review of analogs:
