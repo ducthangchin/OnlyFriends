@@ -1,10 +1,14 @@
 # VideoStreamingWebApp
 A Web service that allows users to upload photos and short videos
-<p><img src="Logo/logo2.png" width="350"></p>
+<!-- <p><img src="Logo/logo2.png" width="350"></p> -->
+<img src="UI-sketches/newfeed.png"/>
 
 ## Analysis of the task and review of analogs:
 ### 1. High-Level Overview:
 Nowadays short video trend is spreading all over the world. This Application inspired by Tik Tok, Facebook story, Youtube Shorts is a social platform where users can share their daily life photos, feelings and short videos. Unlike other platforms, this Application is going to be targeted more towards cinematic and cultural content.
+
+<img src="UI-sketches/home.png"/>
+
 
 ### 2. High-level detail description:
 The application should be support the following requirements:
